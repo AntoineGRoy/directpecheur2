@@ -26,6 +26,8 @@ const OrderContainer=({
   const handleSubmit = e => {
     console.log(localQuantity);
     e.preventDefault();
+    console.log(localQuantity);
+    console.log(product.part_value);
     if (localQuantity&&localQuantity>product.part_value-1) {
       let price=product.prix_au_kilo/1000*localQuantity;
       AddProductToOrder(setDetailsAreShown, setMessage,price,orderUID, setOrderUID, localQuantity, product.id, product.name,userInfos.username,userInfos.id);
