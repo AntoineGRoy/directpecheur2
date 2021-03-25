@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/directpecheur2/static/css/main.dab22db2.chunk.css",
-    "main.js": "/directpecheur2/static/js/main.baa7e74a.chunk.js",
-    "main.js.map": "/directpecheur2/static/js/main.baa7e74a.chunk.js.map",
+    "main.js": "/directpecheur2/static/js/main.c5d0e34b.chunk.js",
+    "main.js.map": "/directpecheur2/static/js/main.c5d0e34b.chunk.js.map",
     "runtime-main.js": "/directpecheur2/static/js/runtime-main.5e59484f.js",
     "runtime-main.js.map": "/directpecheur2/static/js/runtime-main.5e59484f.js.map",
     "static/js/2.786375fc.chunk.js": "/directpecheur2/static/js/2.786375fc.chunk.js",
@@ -22,6 +22,6 @@
     "static/js/runtime-main.5e59484f.js",
     "static/js/2.786375fc.chunk.js",
     "static/css/main.dab22db2.chunk.css",
-    "static/js/main.baa7e74a.chunk.js"
+    "static/js/main.c5d0e34b.chunk.js"
   ]
 }
