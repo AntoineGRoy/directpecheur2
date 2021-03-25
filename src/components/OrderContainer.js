@@ -7,6 +7,7 @@ import "../css/orderContainer.css"
 const OrderContainer=({
   setTotalPrice,
   product,
+  productTotalQuantity,
   setOrderUID,
   orderUID,
   order,
@@ -29,10 +30,12 @@ const OrderContainer=({
     e.preventDefault();
     if (localQuantity&&localQuantity>product.part_value&&localQuantity<product.quantity-1) {
       let price=product.prix_au_kilo/1000*localQuantity;
+      let minusLocalQuantity=parseInt(localQuantity)*-1;
       AddProductToOrder(setDetailsAreShown, setMessage,price,orderUID, setOrderUID, localQuantity, product.id, product.name,userInfos.username,userInfos.id);
       setFirestoreProductNewQuantity(
         product.id,
-        parseInt(-localQuantity,10)
+        productTotalQuantity,
+        minusLocalQuantity
       );
       setlocalQuantity("");
       setDetailsAreShown(false);

@@ -109,6 +109,7 @@ console.log(order)
           >
             <OrderContainer
               product={product}
+              productTotalQuantity={product.quantity}
               order={setOrder} setOrder={setOrder} orderUID={orderUID} setOrderUID={setOrderUID}
               userInfos={userInfos}
               detailsAreShown={detailsAreShown}

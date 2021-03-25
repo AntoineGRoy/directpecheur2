@@ -3,17 +3,30 @@ import { UserContext } from "../usercontext";
 import "../css/orderContainer.css";
 import { RemoveProductFromOrder, setFirestoreProductNewQuantity } from "../helpersFunctions/set";
 import done from "../img/done.svg";
+import { auth, db } from "../firebase";
+
+
 
 export const Order = ({ index, product, orderUID, setTotalPrice, setOrder }) => {
   //checking for new messages
   const { userInfos, setUserInfos } = useContext(UserContext);
   const [fs, setFs] = useState(null);
   const [reqAccepted, setReqAccepted] = useState(false);
+  const [productTotalQuantity,setProductTotalQuantity]=useState(null)
   //accepting friend requesg
   /*function handleRemove(){
     removeProductFromOrder(orderUID,productUID)
   }*/
+  useEffect(()=>{
+    let getProductTotalQuantity=db.collection('products').doc(product.productUID).onSnapshot((doc) => {
+      console.log("Current data: ", doc.data());
+      let newProductTotalQuantity=doc.data().quantity;
+      setProductTotalQuantity(newProductTotalQuantity);
+  });
+  return ()=>{getProductTotalQuantity();}
 
+  })
+  
   useEffect(() => {
     if (product.name) {
       if (product.name.length > 12) {
@@ -37,7 +50,9 @@ export const Order = ({ index, product, orderUID, setTotalPrice, setOrder }) => 
         {product.quantity}g de {product.name}: <b>{product.price}&euro;</b>
         </h2><span style={{cursor:"pointer", pointerEvents:"auto", fontWeight:"bold"}} onClick={()=>{
           RemoveProductFromOrder(product.id,product.orderUID)
-          setFirestoreProductNewQuantity(product.productUID,parseInt(-product.quantity,10))
+          setFirestoreProductNewQuantity(product.productUID,
+            productTotalQuantity,
+            product.quantity)
           setTotalPrice(p=>(p-product.price));
           setOrder(p=>p.splice(index,0))
         console.log("click")
