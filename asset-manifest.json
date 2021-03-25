@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/directpecheur2/static/css/main.dab22db2.chunk.css",
+    "main.js": "/directpecheur2/static/js/main.181f41b2.chunk.js",
+    "main.js.map": "/directpecheur2/static/js/main.181f41b2.chunk.js.map",
+    "runtime-main.js": "/directpecheur2/static/js/runtime-main.5e59484f.js",
+    "runtime-main.js.map": "/directpecheur2/static/js/runtime-main.5e59484f.js.map",
+    "static/js/2.a43cf1f2.chunk.js": "/directpecheur2/static/js/2.a43cf1f2.chunk.js",
+    "static/js/2.a43cf1f2.chunk.js.map": "/directpecheur2/static/js/2.a43cf1f2.chunk.js.map",
+    "index.html": "/directpecheur2/index.html",
+    "static/css/main.dab22db2.chunk.css.map": "/directpecheur2/static/css/main.dab22db2.chunk.css.map",
+    "static/js/2.a43cf1f2.chunk.js.LICENSE.txt": "/directpecheur2/static/js/2.a43cf1f2.chunk.js.LICENSE.txt",
+    "static/media/orderContainer.css": "/directpecheur2/static/media/addFriends.523dc048.svg",
+    "static/media/arrow.eec39cd1.svg": "/directpecheur2/static/media/arrow.eec39cd1.svg",
+    "static/media/bluehook.8491f50b.svg": "/directpecheur2/static/media/bluehook.8491f50b.svg",
+    "static/media/chatProfileViolet.3055d3b3.svg": "/directpecheur2/static/media/chatProfileViolet.3055d3b3.svg",
+    "static/media/done.59c7321b.svg": "/directpecheur2/static/media/done.59c7321b.svg",
+    "static/media/exit.2b0e4681.svg": "/directpecheur2/static/media/exit.2b0e4681.svg",
+    "static/media/hook.923c7084.svg": "/directpecheur2/static/media/hook.923c7084.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5e59484f.js",
+    "static/js/2.a43cf1f2.chunk.js",
+    "static/css/main.dab22db2.chunk.css",
+    "static/js/main.181f41b2.chunk.js"
+  ]
+}
