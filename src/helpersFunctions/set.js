@@ -59,14 +59,14 @@ export const AddProductToOrder = async (setDetailsAreShown, setMessage,price,ord
   });
 };
 
-export const setFirestoreInOrderProductNewQuantity = (orderUID,productUID, value) => {
-  let numberValue=parseInt(value);
-  numberValue=-Math.abs(numberValue);
-  const increment = firebase.firestore.FieldValue.increment(numberValue);
+export const setFirestoreInOrderProductNewQuantity = (orderUID,productUID, value, productValue) => {
+  let numberValue=productValue-value
+ console.log("**********************************************************************************************")
+  console.log(numberValue+"="+productValue+"-"+value)
   db.collection("orders").doc(orderUID)
     .collection("products")
     .doc(productUID)
-    .set({ quantity:increment },{ merge: true })
+    .set({ quantity:numberValue },{ merge: true })
     .then(function() {
       console.log("Quantity Value for my product successfully updated!");
     })
