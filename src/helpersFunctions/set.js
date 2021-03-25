@@ -76,19 +76,18 @@ export const setFirestoreInOrderProductNewQuantity = (orderUID,productUID, value
 
 export const setFirestoreProductNewQuantity = async (productUID, value) => {
   let totalQuantity=0;
-
-  let getQuantity=await db.collection("products")
+  let getProductQuantity=await db.collection("products")
   .doc(productUID)
   .get()
   .then((doc)=>{
     totalQuantity=doc.data().quantity
-    console.log("Quantity Value for my product successfully updated!");
+    return totalQuantity;
   })
   .catch(function(error) {
     console.error("Error getting document: ", error);
   });
- console.log(getQuantity+"**********************************************************************************************")
- let numberValue=totalQuantity+value; 
+ console.log(totalQuantity+"**********************************************************************************************")
+ let numberValue=getProductQuantity+value; 
  db.collection("products")
     .doc(productUID)
     .set({ quantity:numberValue },{ merge: true })

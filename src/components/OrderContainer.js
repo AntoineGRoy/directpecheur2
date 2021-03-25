@@ -32,7 +32,7 @@ const OrderContainer=({
       AddProductToOrder(setDetailsAreShown, setMessage,price,orderUID, setOrderUID, localQuantity, product.id, product.name,userInfos.username,userInfos.id);
       setFirestoreProductNewQuantity(
         product.id,
-        -localQuantity,
+        parseInt(-localQuantity,10)
       );
       setlocalQuantity("");
       setDetailsAreShown(false);
