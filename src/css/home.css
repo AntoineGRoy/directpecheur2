@@ -1,0 +1,13 @@
+.home-container {
+  background: -moz-linear-gradient(
+    17deg,
+    rgba(255, 255, 255, 1) 33%,
+    rgba(59, 89, 147, 1) 54%,
+    rgba(59, 89, 147, .5) 82%
+  );
+}
+.button-style-link:hover {
+  color: rgba(59, 89, 147, 1);
+  background: white;
+  border: 1px solid rgba(59, 89, 147, 1);
+}

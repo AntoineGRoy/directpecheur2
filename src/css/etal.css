@@ -1,0 +1,27 @@
+.etal-container{
+    display:'flex'; 
+    justify-content:center;
+    flex-direction: column;
+    height: 100vw;
+    max-width: 1600px;
+    margin:0 auto;
+}
+.etal-header{
+    background:rgba(59, 89, 147, 1);
+    color:white;
+    display: flex;
+    padding:.5rem;
+    justify-content: center;
+}
+
+h2.etal-intro{
+    display:flex; 
+    justify-content:left;
+    padding:.5rem;
+    color:rgba(59, 89, 147, 1);
+    font-weight: 300;
+    margin: 1rem auto;
+    
+    width:90vw;
+    border-bottom: .5px solid rgba(59, 89, 147, 1);
+}
