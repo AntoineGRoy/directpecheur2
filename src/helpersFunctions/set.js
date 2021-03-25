@@ -61,6 +61,7 @@ export const AddProductToOrder = async (setDetailsAreShown, setMessage,price,ord
 
 export const setFirestoreInOrderProductNewQuantity = (orderUID,productUID, value) => {
   let numberValue=parseInt(value);
+  numberValue=-Math.abs(numberValue);
   const increment = firebase.firestore.FieldValue.increment(numberValue);
   db.collection("orders").doc(orderUID)
     .collection("products")
