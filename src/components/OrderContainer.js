@@ -25,8 +25,9 @@ const OrderContainer=({
   /***Handle Click and Submit***/
   const handleSubmit = e => {
     console.log(localQuantity);
+    console.log(product.part_value);
     e.preventDefault();
-    if (localQuantity&&localQuantity>product.part_value-1) {
+    if (localQuantity&&localQuantity>product.part_value) {
       let price=product.prix_au_kilo/1000*localQuantity;
       AddProductToOrder(setDetailsAreShown, setMessage,price,orderUID, setOrderUID, localQuantity, product.id, product.name,userInfos.username,userInfos.id);
       setFirestoreProductNewQuantity(
