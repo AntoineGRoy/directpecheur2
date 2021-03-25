@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../usercontext";
 import "../css/orderContainer.css";
-import { RemoveProductFromOrder } from "../helpersFunctions/set";
+import { RemoveProductFromOrder, setFirestoreProductNewQuantity } from "../helpersFunctions/set";
 import done from "../img/done.svg";
 
 export const Order = ({ index, product, orderUID, setTotalPrice, setOrder }) => {
@@ -37,9 +37,9 @@ export const Order = ({ index, product, orderUID, setTotalPrice, setOrder }) => 
         {product.quantity}g de {product.name}: <b>{product.price}&euro;</b>
         </h2><span style={{cursor:"pointer", pointerEvents:"auto", fontWeight:"bold"}} onClick={()=>{
           RemoveProductFromOrder(product.id,product.orderUID)
+          setFirestoreProductNewQuantity(product.id,product.quantity)
           setTotalPrice(p=>(p-product.price));
           setOrder(p=>p.splice(index,0))
-
         console.log("click")
       }}>X retirer</span>
       </div>

@@ -74,11 +74,22 @@ export const setFirestoreInOrderProductNewQuantity = (orderUID,productUID, value
     });
 };
 
-export const setFirestoreProductNewQuantity = (productQuantity, productUID, value) => {
-  let numberValue=productQuantity-value
- console.log("**********************************************************************************************")
-  console.log(numberValue+"="+productQuantity+"-"+value)
-  db.collection("products")
+export const setFirestoreProductNewQuantity = async (productUID, value) => {
+  let totalQuantity=0;
+
+  let getQuantity=await db.collection("products")
+  .doc(productUID)
+  .get()
+  .then((doc)=>{
+    totalQuantity=doc.data().quantity
+    console.log("Quantity Value for my product successfully updated!");
+  })
+  .catch(function(error) {
+    console.error("Error getting document: ", error);
+  });
+ console.log(getQuantity+"**********************************************************************************************")
+ let numberValue=totalQuantity+value; 
+ db.collection("products")
     .doc(productUID)
     .set({ quantity:numberValue },{ merge: true })
     .then(function() {

@@ -31,9 +31,8 @@ const OrderContainer=({
       let price=product.prix_au_kilo/1000*localQuantity;
       AddProductToOrder(setDetailsAreShown, setMessage,price,orderUID, setOrderUID, localQuantity, product.id, product.name,userInfos.username,userInfos.id);
       setFirestoreProductNewQuantity(
-        product.quantity,
         product.id,
-        localQuantity,
+        -localQuantity,
       );
       setlocalQuantity("");
       setDetailsAreShown(false);
