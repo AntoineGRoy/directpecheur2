@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/directpecheur2/static/css/main.dab22db2.chunk.css",
-    "main.js": "/directpecheur2/static/js/main.c5d0e34b.chunk.js",
-    "main.js.map": "/directpecheur2/static/js/main.c5d0e34b.chunk.js.map",
+    "main.js": "/directpecheur2/static/js/main.98af3720.chunk.js",
+    "main.js.map": "/directpecheur2/static/js/main.98af3720.chunk.js.map",
     "runtime-main.js": "/directpecheur2/static/js/runtime-main.5e59484f.js",
     "runtime-main.js.map": "/directpecheur2/static/js/runtime-main.5e59484f.js.map",
-    "static/js/2.786375fc.chunk.js": "/directpecheur2/static/js/2.786375fc.chunk.js",
-    "static/js/2.786375fc.chunk.js.map": "/directpecheur2/static/js/2.786375fc.chunk.js.map",
+    "static/js/2.e4d785eb.chunk.js": "/directpecheur2/static/js/2.e4d785eb.chunk.js",
+    "static/js/2.e4d785eb.chunk.js.map": "/directpecheur2/static/js/2.e4d785eb.chunk.js.map",
     "index.html": "/directpecheur2/index.html",
     "static/css/main.dab22db2.chunk.css.map": "/directpecheur2/static/css/main.dab22db2.chunk.css.map",
-    "static/js/2.786375fc.chunk.js.LICENSE.txt": "/directpecheur2/static/js/2.786375fc.chunk.js.LICENSE.txt",
+    "static/js/2.e4d785eb.chunk.js.LICENSE.txt": "/directpecheur2/static/js/2.e4d785eb.chunk.js.LICENSE.txt",
     "static/media/orderContainer.css": "/directpecheur2/static/media/addFriends.523dc048.svg",
     "static/media/arrow.eec39cd1.svg": "/directpecheur2/static/media/arrow.eec39cd1.svg",
     "static/media/bluehook.8491f50b.svg": "/directpecheur2/static/media/bluehook.8491f50b.svg",
@@ -20,8 +20,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.5e59484f.js",
-    "static/js/2.786375fc.chunk.js",
+    "static/js/2.e4d785eb.chunk.js",
     "static/css/main.dab22db2.chunk.css",
-    "static/js/main.c5d0e34b.chunk.js"
+    "static/js/main.98af3720.chunk.js"
   ]
 }
