@@ -37,7 +37,7 @@ export const Order = ({ index, product, orderUID, setTotalPrice, setOrder }) => 
         {product.quantity}g de {product.name}: <b>{product.price}&euro;</b>
         </h2><span style={{cursor:"pointer", pointerEvents:"auto", fontWeight:"bold"}} onClick={()=>{
           RemoveProductFromOrder(product.id,product.orderUID)
-          setFirestoreProductNewQuantity(product.productUID,product.quantity)
+          setFirestoreProductNewQuantity(product.productUID,parseInt(-product.quantity,10))
           setTotalPrice(p=>(p-product.price));
           setOrder(p=>p.splice(index,0))
         console.log("click")
