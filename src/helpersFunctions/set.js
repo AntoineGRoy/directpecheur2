@@ -60,12 +60,12 @@ export const AddProductToOrder = async (setDetailsAreShown, setMessage,price,ord
 };
 
 export const setFirestoreInOrderProductNewQuantity = (orderUID,productUID, value) => {
-  let numberValue=parseInt(value);
-  const increment = firebase.firestore.FieldValue.increment(numberValue);
+  let numberValue=value;
+ console.log("**********************************************************************************************")
   db.collection("orders").doc(orderUID)
     .collection("products")
     .doc(productUID)
-    .set({ quantity:increment },{ merge: true })
+    .set({ quantity:numberValue },{ merge: true })
     .then(function() {
       console.log("Quantity Value for my product successfully updated!");
     })
@@ -74,12 +74,13 @@ export const setFirestoreInOrderProductNewQuantity = (orderUID,productUID, value
     });
 };
 
-export const setFirestoreProductNewQuantity = (productUID, value) => {
-  let numberValue=parseInt(value);
-  const increment = firebase.firestore.FieldValue.increment(-numberValue);
+export const setFirestoreProductNewQuantity = (productQuantity, productUID, value) => {
+  let numberValue=productQuantity-value
+ console.log("**********************************************************************************************")
+  console.log(numberValue+"="+productQuantity+"-"+value)
   db.collection("products")
     .doc(productUID)
-    .set({ quantity:increment },{ merge: true })
+    .set({ quantity:numberValue },{ merge: true })
     .then(function() {
       console.log("Quantity Value for my product successfully updated!");
     })

@@ -37,11 +37,10 @@ const Login = () => {
         flexDirection: "column"
       }}
     >
-      <h1>Entrez votre Email et votre MDP</h1>
+      <h1>Login to Chatty Cats</h1>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <div>
           <input
-        
             style={{
               fontSize: 24,
               height: 32,
@@ -58,7 +57,6 @@ const Login = () => {
         </div>
         <div>
           <input
-
             style={{
               fontSize: 24,
               height: 32,
@@ -96,7 +94,7 @@ const Login = () => {
         </div>
         <hr />
         <p>
-          Pas de compte? <Link to="/signup">Inscrivez-vous!</Link>
+          Don't have an account? <Link to="/signup">Sign up</Link>
         </p>
       </form>
     </div>
