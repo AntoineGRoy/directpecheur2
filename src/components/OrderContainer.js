@@ -22,13 +22,13 @@ const OrderContainer=({
   
   console.log(orderUID)
   console.log(userInfos.username)
-  const [localQuantity, setlocalQuantity] = useState(0);
+  const [localQuantity, setlocalQuantity] = useState(500);
   /***Handle Click and Submit***/
   const handleSubmit = e => {
     console.log(localQuantity);
     console.log(product.part_value);
     e.preventDefault();
-    if (localQuantity&&localQuantity>product.part_value&&localQuantity<product.quantity-1) {
+    if (localQuantity&&localQuantity+1>product.part_value&&localQuantity<product.quantity+1) {
       let price=product.prix_au_kilo/1000*localQuantity;
       let minusLocalQuantity=parseInt(localQuantity)*-1;
       AddProductToOrder(setDetailsAreShown, setMessage,price,orderUID, setOrderUID, localQuantity, product.id, product.name,userInfos.username,userInfos.id);
@@ -37,7 +37,7 @@ const OrderContainer=({
         productTotalQuantity,
         minusLocalQuantity
       );
-      setlocalQuantity("");
+      setlocalQuantity(500);
       setDetailsAreShown(false);
     setContainerIsShown(false);
       setTotalPrice(p=>p+price);
@@ -97,6 +97,7 @@ const OrderContainer=({
         <form onSubmit={handleSubmit}>
           
           <input
+          type="number" min="200" step="100"
             label="Quantité désirée en grammes"
             style={{ fontSize: 18, textAlign:"right" }}
             className="product-input"

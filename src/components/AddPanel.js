@@ -53,6 +53,7 @@ const AddPanel=({setShowAddPanel})=>{
         <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column" }}>
         <label style={{padding:"16px",fontSize:16, color:"white"}}>Nom</label>
           <input
+          type="number" min="0" step="1"
             name="name"
             label="Nom"
             style={{ fontSize: 18, textAlign:"right" }}
@@ -63,6 +64,7 @@ const AddPanel=({setShowAddPanel})=>{
           <label style={{padding:"16px",fontSize:16, color:"white"}}>Prix/Kilo</label>
        
           <input
+          type="number" min="0" step="1"
             name="prix_au_kilo"
             label="Prix au Kilo"
             style={{ fontSize: 18, textAlign:"right" }}
@@ -73,6 +75,7 @@ const AddPanel=({setShowAddPanel})=>{
           <label style={{padding:"16px",fontSize:16, color:"white"}}>Minimum en G</label>
        
           <input
+          type="number" min="0" step="1"
             name="part_value"
             label="Une Part ="
             style={{ fontSize: 18, textAlign:"right" }}
@@ -83,6 +86,7 @@ const AddPanel=({setShowAddPanel})=>{
           <label style={{padding:"16px",fontSize:16, color:"white"}}>Quantité en G</label>
        
           <input
+          type="number" min="0" step="1"
             name="quantity"
             label="Quantité disponible"
             style={{ fontSize: 18, textAlign:"right" }}
