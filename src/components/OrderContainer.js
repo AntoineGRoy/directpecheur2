@@ -36,13 +36,15 @@ const OrderContainer=({
         localQuantity,
       );
       setlocalQuantity("");
+      setDetailsAreShown(false);
+    setContainerIsShown(false);
       setTotalPrice(p=>p+price);
     }else{setMessage("Quantité Insuffisante!")}
   };
   
   const handleCancel = () => {
-    setDetailsAreShown(!detailsAreShown);
-    setContainerIsShown(!containerIsShown);
+    setDetailsAreShown(false);
+    setContainerIsShown(false);
     setlocalQuantity(0);
   };
   
