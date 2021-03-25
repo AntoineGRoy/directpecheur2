@@ -87,7 +87,7 @@ export const setFirestoreProductNewQuantity = async (productUID, value) => {
     console.error("Error getting document: ", error);
   });
  console.log(totalQuantity+"**********************************************************************************************")
- let numberValue=getProductQuantity+value; 
+ let numberValue=totalQuantity+value; 
  db.collection("products")
     .doc(productUID)
     .set({ quantity:numberValue },{ merge: true })
