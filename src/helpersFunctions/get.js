@@ -1,4 +1,40 @@
-import { auth, db } from "../firebase";
+import { config,auth, db } from "../firebase";
+
+export const getProductsOptions=async(setOptions)=>{
+  let options=["non"];
+  let docRef=db.collection("products_types");
+  let newOptions=await docRef.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.exists) {
+          options.push(doc.data().nom)
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      })
+      return options  
+    });
+      console.log(newOptions)
+      setOptions(options)
+};
+export const getDefaultProductValues=async (setProduct,id)=>{
+  let docRef=db.collection("products_types").doc(id);
+  let PI;
+  let getProductInfos=await docRef.get().then((doc) => {
+    let data=doc.data();
+    if (doc.exists) {
+        console.log("Document data:", doc.data());
+        console.log("Document data:", doc.data());
+        PI={minimum:data.minimum,name:data.nom, img_url:`https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${data.default_image_url}?alt=media`, type_de_vente: data.vente, prix_au_kilo:data.prix_au_kilo}
+      setProduct(PI);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+  })
+  console.log(PI)
+  
+};
 
 export const getOrder = (setOrder,orderUID) => {
   db.collection("orders")
@@ -41,60 +77,3 @@ export const getUserInfos = setUserInfos => {
 
 
 
-const setChatName = (contactName, userName) => {
-  let chat = [contactName, userName];
-  chat = chat.sort().join("_");
-  return chat;
-};
-export const getFireStoreUnreadMessages = (
-  contactName,
-  userName,
-  setUnreadMessages
-) => {
-  let chat = setChatName(contactName, userName);
-  console.log(chat);
-  db.collection("chats")
-    .doc(chat)
-    .collection("unreadMessages")
-    .doc(auth.currentUser.uid)
-    .onSnapshot(function(doc) {
-      if (doc.data()) {
-        //setUnreadMessages(doc.data().unreadMessages);
-        setUnreadMessages(doc.data().unreadMessages.unreadMessages);
-      } else {
-        setUnreadMessages(false);
-      }
-    });
-};
-
-
-
-
-
-export const findContact = (setSearchInfo, search, setSearchResults) => {
-  db.collection("users")
-    .where("username", "==", search)
-    .get()
-    .then(function(querySnapshot) {
-      let userFound;
-      querySnapshot.forEach(function(doc) {
-        // doc.data() is never undefined for query doc snapshots
-        userFound = doc.id;
-        setSearchResults([userFound]);
-        let loggedUser = auth.currentUser.uid;
-        console.log(loggedUser + "found" + userFound);
-      });
-      return userFound;
-    })
-    .then(userFound => {
-      if (userFound !== undefined) {
-        setSearchInfo(null);
-      } else {
-        setSearchInfo(null);
-        setSearchInfo("No user Found");
-      }
-    })
-    .catch(function() {
-      setSearchInfo("So Sorry, Something went wrong...");
-    });
-};

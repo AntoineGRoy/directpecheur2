@@ -2,80 +2,90 @@ import React, { useEffect, useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import "../css/orderContainer.css"
 import OrderContainer from "./OrderContainer"
+import {AddProductToOrder} from "../helpersFunctions/set"
 
-export const Product = ({ detailsAreShown, setDetailsAreShown, setTotalPrice, userInfos, order, setOrder, orderUID, setOrderUID, product }) => {
-  //checking for new messages
-console.log(order)
-  const [fs, setFs] = useState(null);
-  //const [orderPanelIsShown, setOrderPanelIsShown]=useState(false);
+export const Product = ({ 
+  setNewOrderAlert,
+  username,
+  userUID,
+  detailsAreShown, 
+  setDetailsAreShown, 
+  setTotalPrice, 
+  userInfos, 
+  order, 
+  setOrder, 
+  orderUID, 
+  setOrderUID, 
+  product }) => {
+
+  const [fontSize, setFontSize] = useState(null);
   const [containerIsShown, setContainerIsShown]=useState(false);
   function handleClick() {
     setDetailsAreShown(!detailsAreShown);
     setContainerIsShown(!containerIsShown);
-    console.log(orderUID)
-    console.log(order)
-
-    console.log(userInfos)
   }
-
 //Set the fontsize depending on name length
   const setFontSizes = useCallback(() => {
     if (product.name) {
       if (product.name.length > 12) {
-        setFs(300 / product.name.length);
+        setFontSize(300 / product.name.length);
       } else {
-        setFs(22);
+        setFontSize(22);
       }
     }
   }, [product.name])
-  useEffect(setFontSizes, [product.name]);
-  
-  //notify the product when we send him a message
- /* const getLiveQuantity = useCallback(() =>
-    listenForProductDetails(
-      productUID,
-      product,
-      setProduct,
-    ), [product.username,
-    userInfos.username])
-  useEffect(
-    callFirestoreUnreadMessages,
-    [messages]
-  );*/
 
+
+  useEffect(setFontSizes, [product.name]);
+  ////checking if some products have stayed in panier too long
+  //['taken']:{['username']:{time_last_modified:sec, quantityTaken:localQuantity,orderUID:orderUID}} }
+           
   return (
-    <div
-    >
+    <div>
       <div
         onClick={handleClick}
         className="order-container"
+        style={{
+          pointerEvents:product.quantity<1?'none':'auto',
+          backgroundColor: product.quantity>0?'white':'lightgrey',
+          border:product.type_de_vente==='a_la_piece'?'2px solid darkseagreen':'2px solid skyblue',
+        }}
       >
        <div className="img-container">
+         <div style={{
+           display:"block",
+           position:'absolute', 
+           top:0}}>{product.type_de_vente==='a_la_piece'?<h3 style={{background:"honeydew"}}>A la Pièce</h3>:<h3 style={{background:'skyblue'}}>Au Poids</h3>}</div>
           <img
             alt={`avatar-${product.name}`}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", filter:product.quantity>0?'none':'grayscale(100%)',}}
             src={product.img_url}
             className={detailsAreShown?'avatar avatar-reduced':'avatar'}
           />
         </div>
         <h2
-          style={{ fontSize: fs }}
+          style={{ fontSize: fontSize }}
           className="name"
         >
           {product.name}
         </h2>
         <h2
-          style={{ fontSize: fs }}
+          style={{ fontSize: fontSize }}
           className="name"
         >
           {product.prix_au_kilo}&euro;/Kg
         </h2>
-        <h2
-          style={{ fontSize: fs }}
+       {product.type_de_vente==='a_la_piece'?<h2
+          style={{ fontSize: fontSize }}
+          className="name"
+        >
+         {product.name} de {product.poids_de_la_piece/1000}Kg
+        </h2>:<h2
+          style={{ fontSize: fontSize }}
           className="name"
         >
           {product.quantity/1000}Kg disponibles!
-        </h2>
+        </h2>}
       </div>
       {containerIsShown && (
         <AnimatePresence>
@@ -87,7 +97,8 @@ console.log(order)
               position: "absolute",
               top: 0,
               left: 0,
-              transform: "translate(0,0)"
+              transform: "translate(0,0)",
+              opacity:1
             }}
             animate={{
               height: "auto",
@@ -95,7 +106,8 @@ console.log(order)
               position: "absolute",
               top: "50%",
               left: "50%",
-              transform: "translate(-50%,-50%)"
+              transform: "translate(-50%,-50%)",
+              opacity:1
             }}
             exit={{
               height: 0,
@@ -103,14 +115,16 @@ console.log(order)
               position: "absolute",
               top: 0,
               right: 0,
-              transform: "translate(0,0)"
+              transform: "translate(0,0)",
+              opacity:1
             }}
-            style={{zIndex:99}}
+            style={{zIndex:999}}
           >
             <OrderContainer
+            setNewOrderAlert={setNewOrderAlert}
               product={product}
               productTotalQuantity={product.quantity}
-              order={setOrder} setOrder={setOrder} orderUID={orderUID} setOrderUID={setOrderUID}
+              order={order} setOrder={setOrder} orderUID={orderUID} setOrderUID={setOrderUID}
               userInfos={userInfos}
               detailsAreShown={detailsAreShown}
               setDetailsAreShown={setDetailsAreShown}

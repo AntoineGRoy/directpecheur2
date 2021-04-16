@@ -1,10 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
 
 import bluehook from "../img/bluehook.svg";
-import { setFirestoreProductNewQuantity, AddProductToOrder } from "../helpersFunctions/set";
+import { setFirestoreProductNewQuantity, addProductToOrder } from "../helpersFunctions/set";
 import "../css/orderContainer.css"
 
 const OrderContainer=({
+  setNewOrderAlert,
   setTotalPrice,
   product,
   productTotalQuantity,
@@ -19,29 +20,25 @@ const OrderContainer=({
   setContainerIsShown
 })=>{
   const [message,setMessage]=useState('')
-  
+  useEffect(()=>{
+    if(product.poids_de_la_piece>0){
+      setlocalQuantity(product.poids_de_la_piece)
+    }
+  },[product])
   console.log(orderUID)
   console.log(userInfos.username)
   const [localQuantity, setlocalQuantity] = useState(500);
   /***Handle Click and Submit***/
   const handleSubmit = e => {
     console.log(localQuantity);
-    console.log(product.part_value);
     e.preventDefault();
-    if (localQuantity&&localQuantity+1>product.part_value&&localQuantity<product.quantity+1) {
       let price=product.prix_au_kilo/1000*localQuantity;
-      let minusLocalQuantity=parseInt(localQuantity)*-1;
-      AddProductToOrder(setDetailsAreShown, setMessage,price,orderUID, setOrderUID, localQuantity, product.id, product.name,userInfos.username,userInfos.id);
-      setFirestoreProductNewQuantity(
-        product.id,
-        productTotalQuantity,
-        minusLocalQuantity
-      );
-      setlocalQuantity(500);
+      addProductToOrder(orderUID, product,userInfos.username,userInfos.id,price,localQuantity);
+      setFirestoreProductNewQuantity(product.id, localQuantity, 'minus');
       setDetailsAreShown(false);
-    setContainerIsShown(false);
+      setContainerIsShown(false);
+      setNewOrderAlert(p=>p+1);
       setTotalPrice(p=>p+price);
-    }else{setMessage("Quantité Insuffisante!")}
   };
   
   const handleCancel = () => {
@@ -53,6 +50,7 @@ const OrderContainer=({
 
   return (
     <div
+      
       className={`product-container ${
         detailsAreShown ? "product-container-expanded" : undefined
         }`}
@@ -86,18 +84,17 @@ const OrderContainer=({
         Prix au kilo: {product.prix_au_kilo}&euro;{"    "}
       </li>
       
-      <li style={{paddingBottom:"16px"}}>
-        Qantité conseillée par personne : {product.part_value}g
-      </li></ul>
+      {product.type_de_vente==='au_poids'&&<li style={{paddingBottom:"16px"}}>
+        Qantité minimum : {product.minimum}g
+      </li>}</ul>
       
       </div>
       <div className="input-button-container">
+      {product.type_de_vente==='au_poids'&& <>
       <label style={{padding:"16px",fontSize:16, color:"white"}}>Quantité désirée en grammes</label><span style={{color:"red",padding:message&&8,background:"white"}}>{message}</span>
-      
-        <form onSubmit={handleSubmit}>
-          
-          <input
-          type="number" min="200" step="100"
+        <form onSubmit={handleSubmit}> 
+       <input
+          type="number" min={product.minimum} max={product.total_quantity} step="200"
             label="Quantité désirée en grammes"
             style={{ fontSize: 18, textAlign:"right" }}
             className="product-input"
@@ -112,7 +109,13 @@ const OrderContainer=({
           <button className="input-button" style={{color:"white"}} onClick={handleCancel}>
             Annuler
           </button>
-        </form>
+        </form></>}
+        {product.type_de_vente==='a_la_piece'&&<><p style={{width:"100%", color:"white", fontSize:16, textAlign:"center"}}>Poids de la Pièce: {product.poids_de_la_piece}</p>
+        <div className="input-button" style={{cursor:'pointer',background:'transparent', border:0, borderColor:'transparent', width:'100%',textAlign:'center'}} onClick={handleSubmit}>
+          <img style={{ height: "2.5rem", width: "2.5rem" }} src={bluehook} />
+          <p style={{width:"100%", color:"white", fontSize:16, textAlign:"center"}}>Confirmer</p>
+         
+          </div></>}
       </div>
     </div>
   );

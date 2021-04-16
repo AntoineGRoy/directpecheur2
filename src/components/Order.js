@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../usercontext";
 import "../css/orderContainer.css";
-import { RemoveProductFromOrder, setFirestoreProductNewQuantity } from "../helpersFunctions/set";
+import { removeProductFromOrder, setFirestoreProductNewQuantity } from "../helpersFunctions/set";
 import done from "../img/done.svg";
 import { auth, db } from "../firebase";
 
 
 
 export const Order = ({ index, product, orderUID, setTotalPrice, setOrder }) => {
+  console.log(product)
+  console.log(orderUID)
   //checking for new messages
   const { userInfos, setUserInfos } = useContext(UserContext);
   const [fs, setFs] = useState(null);
@@ -15,19 +17,13 @@ export const Order = ({ index, product, orderUID, setTotalPrice, setOrder }) => 
   const [productTotalQuantity,setProductTotalQuantity]=useState(null)
   //accepting friend requesg
   /*function handleRemove(){
-    removeProductFromOrder(orderUID,productUID)
+    removeProductFromOrder(orderUID,productUID) 
   }*/
-  useEffect(()=>{
-    let getProductTotalQuantity=db.collection('products').doc(product.productUID).onSnapshot((doc) => {
-      console.log("Current data: ", doc.data());
-      let newProductTotalQuantity=doc.data().quantity;
-      setProductTotalQuantity(newProductTotalQuantity);
-  });
-  return ()=>{getProductTotalQuantity();}
-
-  })
+  console.log(product)
   
   useEffect(() => {
+    console.log("PROD IN ORDER")
+    console.log(product)
     if (product.name) {
       if (product.name.length > 12) {
         setFs(300 / product.name.length);
@@ -36,25 +32,19 @@ export const Order = ({ index, product, orderUID, setTotalPrice, setOrder }) => 
         setFs(22);
       }
     }
-    //getFireStoreMessagesCount();
   }, [product]);
-
-  useEffect(() => {
-    console.log(product);
-  }, [reqAccepted]);
-
+  
   return (
     <div>
       <div>
-        <h2 style={{ fontSize: fs }} className="name">
-        {product.quantity}g de {product.name}: <b>{product.price}&euro;</b>
-        </h2><span style={{cursor:"pointer", pointerEvents:"auto", fontWeight:"bold"}} onClick={()=>{
-          RemoveProductFromOrder(product.id,product.orderUID)
+          {product.type_de_vente==='a_la_piece'?<h3>1 {product.name} de {product.quantity}g --- {product.price} &euro;</h3>:<h3>{product.orderQuantity}g de {product.name} <b>{product.price}&euro;</b></h3>}
+        <span style={{border:"2px solid orange",marginTop:14,padding:4,cursor:"pointer", pointerEvents:"auto", fontWeight:"bold"}} onClick={()=>{
+          removeProductFromOrder(product.id,orderUID)
+          console.log(product.productUID)
           setFirestoreProductNewQuantity(product.productUID,
-            productTotalQuantity,
-            product.quantity)
+            product.quantity, 'plus')
           setTotalPrice(p=>(p-product.price));
-          setOrder(p=>p.splice(index,0))
+          setOrder(p=>p.splice(index,1))
         console.log("click")
       }}>X retirer</span>
       </div>

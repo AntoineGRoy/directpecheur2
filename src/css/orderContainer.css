@@ -288,28 +288,4 @@ h2.name-reduced {
   list-style: none;
 }
 
-/***Friend Request**/
-.product-friend-request-container{
-  border-radius: 0;
-  border:1px white solid;
-  position: relative;
-}
-.product-friend-request-overlay{
-cursor: pointer;
-position: absolute;
-content:"";
-background-color:transparent;
-border-radius:10%;
-width: 150px;
-height: 150px;
-opacity:0;
-background-image: url(../img/addFriends.svg);
-background-size: 50px;
-background-repeat: no-repeat;
-background-position: center;
- transition: all ease-in-out 1s;
-}
-.product-friend-request-overlay:hover{
-  opacity:.8;
-}
 

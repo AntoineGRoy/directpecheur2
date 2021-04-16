@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Product } from "./Product";
 
-
-
-const ProductsList = ({ setTotalPrice, userInfos, products, order, setOrder, orderUID, setOrderUID }) => {
+const ProductsList = ({ setNewOrderAlert, setTotalPrice, userInfos, products, order, setOrder, orderUID, setOrderUID }) => {
   console.log(products);
   const[detailsAreShown, setDetailsAreShown]= useState(false);
   return (
@@ -20,7 +18,7 @@ const ProductsList = ({ setTotalPrice, userInfos, products, order, setOrder, ord
       >
         {products &&
           products[0] !== null &&
-          products.map((p,index) => <Product detailsAreShown={detailsAreShown} setDetailsAreShown={setDetailsAreShown} setTotalPrice={setTotalPrice} userInfos={userInfos} product={p} order={order} setOrder={setOrder} orderUID={orderUID} setOrderUID={setOrderUID} key={p +index+ "key"}
+          products.map((p,index) => <Product setNewOrderAlert={setNewOrderAlert} username={userInfos.username} userUID={userInfos.userUID} detailsAreShown={detailsAreShown} setDetailsAreShown={setDetailsAreShown} setTotalPrice={setTotalPrice} userInfos={userInfos} product={p} order={order} setOrder={setOrder} orderUID={orderUID} setOrderUID={setOrderUID} key={p +index+ "key"}
             contactUID={p}
           />)}
         {!products && <p>loading...</p>}

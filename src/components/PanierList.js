@@ -1,14 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { confirmOrder } from "../helpersFunctions/set";
 import { UserContext } from "../usercontext";
 import { Order } from "./Order";
+import { auth, db } from "../firebase";
+import firebase from "firebase";
 
-const PanierList = ({userInfos,orderUID, order, setOrder, totalPrice, setTotalPrice}) => {
+const PanierList = ({ newOrderAlert, userInfos,setOrderUID, orderUID, order, setOrder, totalPrice, setTotalPrice}) => {
   const[orderConfirmed, setOrderConfirmed]= useState(false);
   const[deliveryTime, setDeliveryTime]= useState("dès que possible");
   const [deliveryAddress,setDeliveryAddress]=useState("");
   const [showAddressInput,setShowAddressInput]=useState(false);
   const [showTimeInput,setShowTimeInput]=useState(false);
+ 
   console.log(order);
   function handleAddressChange(event) {
     setDeliveryAddress(
@@ -21,8 +24,25 @@ const PanierList = ({userInfos,orderUID, order, setOrder, totalPrice, setTotalPr
     );
   }
   useEffect(()=>{
-    console.log("NEWORDER")
-  },[order])
+    console.log("GETTING A NEW ORDER")
+    let mounted=true;
+    var productsInOrder = [];
+    let unsubscribe=orderUID!=='initial'?
+    db.collection('orders')
+    .doc(orderUID).collection('products').get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+         if(!order.includes({...doc.data(),id:doc.id})) productsInOrder.push({...doc.data(),id:doc.id});
+      });
+      if(mounted)
+      {setOrder([...productsInOrder]); console.log("ORDER ORDER!")}
+  }):()=>{};
+
+  return ()=>{
+    mounted=false;
+  }
+  },[newOrderAlert])
+
+
   return (
     <div>
       {orderConfirmed&&<div style={{fontSize:24,postion:"absolute",width:"90vw", height:"90vh", textAlign:"center"}}>Merci! <br />
@@ -35,9 +55,10 @@ const PanierList = ({userInfos,orderUID, order, setOrder, totalPrice, setTotalPr
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center"
-      }}
-    >{userInfos.username&&order.length===0&&<h2>Faîtes votre choix...</h2>}
-      {userInfos&&orderUID&&order[0]&&
+      }} 
+    >{order.length<1&&<h2>Faîtes votre choix...</h2>}
+    {console.log(order)}
+      {userInfos&&orderUID&&order[0]&&newOrderAlert&&
         order.map((p,index) => (
           <Order index={index} setTotalPrice={setTotalPrice} product={p} setOrder={setOrder} orderUID={orderUID} key={p+index+ "key"} />
         ))}

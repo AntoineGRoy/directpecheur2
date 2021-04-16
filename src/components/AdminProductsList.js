@@ -24,8 +24,8 @@ const AdminProductsList = ({ products }) => {
           products.map((p,index) => <AdminProduct product={p} key={p +index+ "key"}
           />)}
         {!products && <p>loading...</p>}
-        {!showAddPanel&&<button style={{cursor:"pointer",marginTop:16,border:0,background:"orange", color:"white", fontWeight:"bold", padding:".5rem", borderRadius:8}} onClick={()=>{setShowAddPanel(!showAddPanel)}}>Ajouter</button>}
-          {showAddPanel&&<AddPanel setShowAddPanel={setShowAddPanel}/>}
+        {showAddPanel===false&&<button style={{cursor:"pointer",marginTop:36,minWidth:120,border:0,background:"orange", color:"white", fontWeight:"bold", padding:".5rem", borderRadius:8}} onClick={()=>{setShowAddPanel(true)}}>Ajouter</button>}
+          {showAddPanel===true&&<AddPanel setShowAddPanel={setShowAddPanel}/>}
       </div>
       </div>
   );
