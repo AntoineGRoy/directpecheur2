@@ -37,7 +37,7 @@ export const Order = ({ index, product, orderUID, setTotalPrice, setOrder }) => 
   return (
     <div>
       <div>
-          {product.type_de_vente==='a_la_piece'?<h3>1 {product.name} de {product.quantity}g --- {product.price} &euro;</h3>:<h3>{product.orderQuantity}g de {product.name} <b>{product.price}&euro;</b></h3>}
+          {product.type_de_vente==='a_la_piece'?<h3>1 {product.name} de {product.quantity}g --- {product.price} &euro;</h3>:<h3>{product.quantity}g de {product.name} <b>{product.price}&euro;</b></h3>}
         <span style={{border:"2px solid orange",marginTop:14,padding:4,cursor:"pointer", pointerEvents:"auto", fontWeight:"bold"}} onClick={()=>{
           removeProductFromOrder(product.id,orderUID)
           console.log(product.productUID)

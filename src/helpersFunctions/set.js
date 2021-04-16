@@ -2,6 +2,12 @@ import { auth, db } from "../firebase";
 import firebase from "firebase";
 
 
+export const cleaningUpPendingOrders=()=>{
+
+    db.collection('orders').where('status','!=','confirmed').get().then((snapshot)=>{
+
+    })
+}
 
 export const addProductToFirestore=(setDetailsAreShown, setProduct, product)=>{
   let docId;
@@ -57,7 +63,8 @@ export const setFirestoreProductNewQuantity = async (productUID, value, operator
 
 export const addProductToOrder = async (orderUID, product,username,userUID,price,quantity) => {
   //setting a time for the product
-  const sec = Math.round(Date.now() / 1000)
+  const sec = Math.round(Date.now() / 1000);
+  console.log(quantity)
   let newProductInOrder = {
     orderUID:orderUID,
     name:product.name,

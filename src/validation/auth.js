@@ -31,6 +31,5 @@ export function createUser(
 }
 
 export function signin(email, password) {
-  let Email=email.toLowerCase();
-  return auth.signInWithEmailAndPassword(Email, password);
+  return auth.signInWithEmailAndPassword(email, password);
 }

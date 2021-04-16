@@ -11,6 +11,7 @@ const Login = () => {
     password: ''
   });
   function handleChange(event) {
+    event.preventDefault();
     console.log(state);
     setState({
       ...state,
@@ -22,7 +23,7 @@ const Login = () => {
     event.preventDefault();
     setState({ ...state, error: "" });
     try {
-      await signin(state.email, state.password);
+      await signin(state.email.toLowerCase(), state.password);
     } catch (error) {
       setState({ error: error.message });
     }
@@ -38,7 +39,7 @@ const Login = () => {
       }}
     >
       <h1>Login to Chatty Cats</h1>
-      <form autoComplete="off" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div>
           <input
             style={{

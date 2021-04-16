@@ -29,10 +29,19 @@ const AddPanel=({setShowAddPanel})=>{
   }
   //all other fields
   function handleChange(event) {
-    setProduct({
-      ...product,
-      [event.target.name]: event.target.value
-    });
+    if(event.target.type==='number'){
+      let num=parseInt(event.target.value);
+      setProduct({
+        ...product,
+        [event.target.name]: num
+      });
+    }else{
+      setProduct({
+        ...product,
+        [event.target.name]: event.target.value
+      });
+    }
+    
   }
   //submission, adding to order in firestore
   const handleSubmit = e => {

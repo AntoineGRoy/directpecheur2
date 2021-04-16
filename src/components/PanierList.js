@@ -7,7 +7,7 @@ import firebase from "firebase";
 
 const PanierList = ({ newOrderAlert, userInfos,setOrderUID, orderUID, order, setOrder, totalPrice, setTotalPrice}) => {
   const[orderConfirmed, setOrderConfirmed]= useState(false);
-  const[deliveryTime, setDeliveryTime]= useState("dès que possible");
+  const[deliveryTime, setDeliveryTime]= useState(" Ce soir entre 18H00 et 20H00");
   const [deliveryAddress,setDeliveryAddress]=useState("");
   const [showAddressInput,setShowAddressInput]=useState(false);
   const [showTimeInput,setShowTimeInput]=useState(false);
@@ -40,7 +40,7 @@ const PanierList = ({ newOrderAlert, userInfos,setOrderUID, orderUID, order, set
   return ()=>{
     mounted=false;
   }
-  },[newOrderAlert])
+},[newOrderAlert])
 
 
   return (
@@ -65,12 +65,12 @@ const PanierList = ({ newOrderAlert, userInfos,setOrderUID, orderUID, order, set
         </div>
         <div style={{margin:"32px auto", width:"90vw"}}><h2>Total du Jour: {totalPrice}&euro;</h2> </div>
         {totalPrice>0?<div style={{width:"90vw", margin:"0 auto", textAlign:"center"}}>
-          <div style={{margin:16}}>Livrer à {deliveryAddress || userInfos.address} - <span style={{border:"1px black solid", cursor:"pointer"}} onClick={()=>{setShowAddressInput(true)}}>Changer</span></div>
+          <div style={{margin:16}}>Livrer à <h3>{deliveryAddress || userInfos.address}</h3><span style={{border:"1px black solid", background:'skyblue', padding:4, cursor:"pointer"}} onClick={()=>{setShowAddressInput(true)}}>Changer</span></div>
           {showAddressInput&&<div><input type="text" name="address" onChange={handleAddressChange} value={deliveryAddress}/><button onClick={()=>{
             setShowAddressInput(false);console.log(deliveryAddress)
           }}>Confirmer</button></div>
           }
-          <div style={{margin:16}}>Heure de livraison {deliveryTime} - <span style={{border:"1px black solid", cursor:"pointer"}} onClick={()=>{setShowTimeInput(true)}}>Changer</span></div>
+          <div style={{margin:16}}>Heure de livraison <h3>{deliveryTime}</h3> <span style={{border:"1px black solid", background:'skyblue', padding:4, cursor:"pointer"}} onClick={()=>{setShowTimeInput(true)}}>Changer</span></div>
           {showTimeInput&&<div><input type="text" name="address" onChange={handleTimeChange} value={deliveryTime}/><button onClick={()=>{
             setShowTimeInput(false);console.log(deliveryTime)
           }}>Confirmer</button></div>

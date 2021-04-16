@@ -19,6 +19,7 @@ const Etal = () => {
   const [newOrderAlert, setNewOrderAlert]=useState(0);
   useEffect(() => {
     getUserInfos(setUserInfos);
+    //cleaningUpPendingOrders();
   }, []);
 
   console.log(userInfos)
