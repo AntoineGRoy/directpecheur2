@@ -46,6 +46,7 @@ export const Product = ({
         onClick={handleClick}
         className="order-container"
         style={{
+          zIndex:0,
           pointerEvents:product.quantity<1?'none':'auto',
           backgroundColor: product.quantity>0?'white':'lightgrey',
           border:product.type_de_vente==='a_la_piece'?'2px solid darkseagreen':'2px solid skyblue',

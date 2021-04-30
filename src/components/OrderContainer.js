@@ -50,7 +50,7 @@ const OrderContainer=({
 
   return (
     <div
-      
+      style={{zIndex:999}}
       className={`product-container ${
         detailsAreShown ? "product-container-expanded" : undefined
         }`}
