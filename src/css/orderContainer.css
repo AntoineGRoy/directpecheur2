@@ -139,7 +139,7 @@ h2 {
 
 .order-container {
   position: relative;
-  z-index: 999;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -189,29 +189,27 @@ h2 {
 img.avatar {
   max-height: 100px;
   max-width: 120px;
-  z-index:0;
+  z-index:1;
   width: auto;
   height: auto;
   margin-bottom: 0;
 }
 /************Disappear when product is shown *************/
+
 .product-container-reduced {
-  z-index: 0;
-}
-.product-container-reduced {
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
 }
 
 img.avatar.avatar-reduced {
-  display:none;
+  z-index:1;
 }
 h2.name {
   margin-top: 6px;
   font-weight: 300;
 }
 h2.name-reduced {
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
 }
 

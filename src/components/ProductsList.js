@@ -1,6 +1,6 @@
-import React, { lazy, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Product from "./Product"
 
-const Product = lazy(() => import('./Product'));
 const ProductsList = ({ setNewOrderAlert, setTotalPrice, userInfos, products, order, setOrder, orderUID, setOrderUID }) => {
   console.log(products);
   const[detailsAreShown, setDetailsAreShown]= useState(false);
@@ -26,4 +26,4 @@ const ProductsList = ({ setNewOrderAlert, setTotalPrice, userInfos, products, or
     </div>
   );
 };
-export default ProductsList;
+export default ProductsList
