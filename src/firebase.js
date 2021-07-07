@@ -3,7 +3,7 @@ import "firebase/auth";
 import "firebase/firestore";
 
 export const config = {
-    apiKey: "AIzaSyAlBaCFinB-aIngyUsjgwjRxGvyrJmnA-c",
+    apiKey: "SECRET",
     authDomain: "direct-pecheur.firebaseapp.com",
     databaseURL: "https://direct-pecheur-default-rtdb.firebaseio.com",
     projectId: "direct-pecheur",
